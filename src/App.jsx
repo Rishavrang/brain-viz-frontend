@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import Brain from './components/Brain'
 
 import './App.css'
 
@@ -41,6 +44,18 @@ function App() {
 
   return (
     <div>
+      <div style={{width: '100%', height: '500px'}}>
+        <Canvas camera={{position: [0,0,5]}}>
+          <ambientLight intensity={1}/>
+          <directionalLight position={[5,5,5]}/>
+          <Brain />
+          <OrbitControls
+            target={[0,0,0]}
+            minDistance={2}
+            maxDistance={10}
+          />
+        </Canvas>
+      </div>
       <h2>Brain Viz Chat</h2>
       <div>
         {messages.map((msg, index) => (
