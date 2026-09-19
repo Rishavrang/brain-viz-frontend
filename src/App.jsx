@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import Brain from './components/Brain'
-
+import BrainPoint from './components/BrainPoint'
 import './App.css'
 
 function App() {
@@ -54,6 +54,10 @@ function App() {
             minDistance={2}
             maxDistance={10}
           />
+          <BrainPoint x={0} y={0} z={0}/>
+          <BrainPoint x={-70} y={0} z={0}/>
+          <BrainPoint x={70} y={0} z={0}/>
+          <BrainPoint x={0} y={0} z={70}/>
         </Canvas>
       </div>
       <h2>Brain Viz Chat</h2>
