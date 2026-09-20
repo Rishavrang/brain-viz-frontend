@@ -57,7 +57,7 @@ function App() {
             maxDistance={10}
           />
             {coordinates.map((coord, index) => (
-              <BrainPoint key={index} x={coord.x} y={coord.y} z={coord.z}/>
+              <BrainPoint key={index} x={coord.x} y={coord.y} z={coord.z} weight={coord.weight}/>
             ))}
         </Canvas>
       </div>
