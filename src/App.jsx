@@ -9,6 +9,7 @@ function App() {
   const [conversationId, setConversationId] = useState(null)
   const [messages, setMessages ] = useState([])
   const [inputText, setInputText] = useState("")
+  const [coordinates, setCoordinates] = useState([])
 
   async function startConversation() {
     const response = await fetch('http://127.0.0.1:8000/new-conversation', {
@@ -40,6 +41,7 @@ function App() {
 
     const assistantMessage = { role: "assistant", content: data.reply };
     setMessages(prevMessages => [...prevMessages, assistantMessage]);
+    setCoordinates(data.coordinates);
   }
 
   return (
@@ -54,10 +56,9 @@ function App() {
             minDistance={2}
             maxDistance={10}
           />
-          <BrainPoint x={0} y={0} z={0}/>
-          <BrainPoint x={-70} y={0} z={0}/>
-          <BrainPoint x={70} y={0} z={0}/>
-          <BrainPoint x={0} y={0} z={70}/>
+            {coordinates.map((coord, index) => (
+              <BrainPoint key={index} x={coord.x} y={coord.y} z={coord.z}/>
+            ))}
         </Canvas>
       </div>
       <h2>Brain Viz Chat</h2>
