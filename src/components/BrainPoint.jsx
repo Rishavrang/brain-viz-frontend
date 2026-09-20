@@ -15,11 +15,11 @@ function BrainPoint({x,y,z, weight}) {
     
     return (
         <mesh position={[x/73.33, z/73.33, y/73.33]}>
-            <sphereGeometry args={[0.08, 16, 16]} />
+            <sphereGeometry args={[0.12, 16, 16]} />
             <meshStandardMaterial 
                 color={color}
                 emissive={color}
-                emissiveIntensity={1}
+                emissiveIntensity={4}
                 />
         </mesh>
     )    

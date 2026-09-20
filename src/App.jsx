@@ -46,8 +46,8 @@ function App() {
 
   return (
     <div>
-      <div style={{width: '100%', height: '500px'}}>
-        <Canvas camera={{position: [0,0,5]}}>
+      <div style={{width: '100%', height: '650px'}}>
+        <Canvas camera={{position: [0,0,4]}}>
           <ambientLight intensity={1}/>
           <directionalLight position={[5,5,5]}/>
           <Brain />
