@@ -62,7 +62,7 @@ function App() {
         </Canvas>
       </div>
       <h2>Brain Viz Chat</h2>
-      <div>
+      <div style = {{width:'100%', height:'300px', overflowY:'auto'}}>
         {messages.map((msg, index) => (
           <div key={index}>{msg.role}: {msg.content}</div>
       ))}

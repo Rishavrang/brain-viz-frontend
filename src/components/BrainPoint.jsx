@@ -1,16 +1,13 @@
 function BrainPoint({x,y,z, weight}) {
     let color = null;
-    if (weight>0.80){
+    if (weight>0.75){
         color = "red";
     }
     else if (weight>0.50){
         color = "orange";
     }
-    else if (weight>0.05) {
+    else {
         color = "yellow";
-    }
-    else{
-        return null;
     }
     
     return (
