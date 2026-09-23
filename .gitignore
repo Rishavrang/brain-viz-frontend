@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tooling output
+.playwright-mcp/
+.impeccable/review/
+.impeccable/hook.cache.json
+.impeccable/config.local.json

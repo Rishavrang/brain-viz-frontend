@@ -1,0 +1,99 @@
+{
+  "source": "https://linear.app",
+  "tokens": {
+    "spacing": {
+      "scale": [4, 8, 12, 16, 24, 48, 224],
+      "base_unit": 4
+    },
+    "typography": {
+      "families": ["Inter Variable", "Berkeley Mono"],
+      "scale": [
+        { "role": "h1", "size": "64px", "weight": "510", "family": "Inter Variable", "line_height": "64px", "letter_spacing": "-1.408px" },
+        { "role": "h2", "size": "48px", "weight": "510", "family": "Inter Variable", "line_height": "48px", "letter_spacing": "-1.056px" },
+        { "role": "h3", "size": "20px", "weight": "590", "family": "Inter Variable", "line_height": "26.6px", "letter_spacing": "-0.24px" },
+        { "role": "h4", "size": "16px", "weight": "590", "family": "Inter Variable", "line_height": "28px" },
+        { "role": "body", "size": "15px", "weight": "400", "family": "Inter Variable", "line_height": "24px" },
+        { "role": "ui", "size": "13px", "weight": "400", "family": "Inter Variable" },
+        { "role": "meta", "size": "12px", "weight": "400", "family": "Inter Variable" },
+        { "role": "mono", "size": "12-13px", "weight": "400", "family": "Berkeley Mono" }
+      ]
+    },
+    "colors": [
+      { "role": "background", "value": "#08090A" },
+      { "role": "surface", "value": "#0F1011" },
+      { "role": "surface-raised", "value": "#161718" },
+      { "role": "text-primary", "value": "#F7F8F8" },
+      { "role": "text-strong", "value": "#E2E4E7" },
+      { "role": "text-secondary", "value": "#D0D6E0" },
+      { "role": "text-body", "value": "#8A8F98" },
+      { "role": "text-meta", "value": "#62666D" },
+      { "role": "border-hairline", "value": "rgba(255,255,255,0.08)" },
+      { "role": "cta-fill", "value": "near-white pill (~#E6E6E6, approx from screenshot)" }
+    ],
+    "radius": ["4px", "6px", "8px", "9px", "12px", "9999px", "50%"],
+    "shadows": [
+      "0 0 0 1px rgba(0,0,0,0.2)",
+      "0 2px 32px 0 rgba(0,0,0,0.25)",
+      "inset 0 0 0 0.5px rgba(255,255,255,0.08)",
+      "inset 0 0 0 1px rgba(255,255,255,0.05)",
+      "inset 0 0 0 1px #23252A"
+    ],
+    "image_ratios": [
+      { "usage": "hero (app screenshot)", "ratio": "1.79:1" },
+      { "usage": "agent panel", "ratio": "0.77:1" },
+      { "usage": "avatar/logo", "ratio": "1:1" }
+    ],
+    "grid": { "max_width": "none (content ~1272px at 1440 viewport)", "columns": 5, "gutter": "~222px column pitch (footer)" }
+  },
+  "taste": [
+    {
+      "name": "No Brand Accent",
+      "trigger": "When the designers faced a dark page where a brand hue would be the usual way to mark the primary action.",
+      "decision": "Chose a white pill button on near-black (#08090A) over a saturated brand-color CTA and accent links.",
+      "reason": "The mock-ups contain colored status icons and labels, which are the product's own signals. A page-level accent would compete with them.",
+      "evidence": [
+        "No chromatic color in nav, links or buttons",
+        "#08090A is 64.1% and #0F1011 is 20.7% of background area",
+        "CTA is a 9999px near-white pill",
+        "accent candidates are all grays and white"
+      ]
+    },
+    {
+      "name": "Lightness Ladder",
+      "trigger": "When the designers faced a large amount of small text on a dark surface where bold weights would smear.",
+      "decision": "Chose five steps of text lightness and 400/510 weights over larger sizes and heavier weights to rank information.",
+      "reason": "On dark backgrounds, bolder type blooms and sizes inflate the panels. Lightness lets a reader skip dim meta text without it being hidden.",
+      "evidence": [
+        "#F7F8F8, #E2E4E7, #D0D6E0, #8A8F98 x190, #62666D x132",
+        "weights 400 x484 and 510 x141",
+        "12/13/14/15px make up ~584 text nodes"
+      ]
+    },
+    {
+      "name": "Hairlines, Not Shadows",
+      "trigger": "When the designers faced stacking panels that are only a few percent lighter than the page.",
+      "decision": "Chose 0.5-1px white-alpha inset rings, with one soft drop shadow for floating agent panels, over layered drop shadows on every card.",
+      "reason": "A black shadow is invisible on #08090A, so the edge has to come from light. Only the floating panel overlaps content, so only it gets a shadow.",
+      "evidence": [
+        "inset 0 0 0 0.5px rgba(255,255,255,0.08)",
+        "inset 0 0 0 1px rgba(255,255,255,0.05)",
+        "0 2px 32px rgba(0,0,0,0.25) on the 400x520 panel",
+        "all shadows single-layer, pure black or white-alpha",
+        "radius steps 12 -> 9 -> 6 -> 4px"
+      ]
+    },
+    {
+      "name": "Product as Imagery",
+      "trigger": "When the designers faced a marketing page that would normally carry illustrations, stock photos or abstract gradients.",
+      "decision": "Chose cropped, near-live UI mock-ups over illustration or photography.",
+      "reason": "The buyer is judging a tool they will live in for hours. A screenshot with real issue IDs and mono chips shows density and speed better than a picture of a team.",
+      "evidence": [
+        "hero image 2560x1429 (1.79:1) at 1440px",
+        "agent panels 400x520 (0.77:1)",
+        "every sampled image is a screenshot or a 1:1 avatar/logo",
+        "Berkeley Mono x264 for ENG-2844-style IDs",
+        "~150-224px whitespace between sections, one hairline above the footer"
+      ]
+    }
+  ]
+}

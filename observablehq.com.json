@@ -1,0 +1,88 @@
+{
+  "source": "https://observablehq.com",
+  "tokens": {
+    "spacing": {
+      "scale": [2, 4, 8, 16, 17, 32, 64, 96],
+      "base_unit": 4
+    },
+    "typography": {
+      "families": ["Inter Variable", "Source Serif 4 Variable", "Spline Sans Mono Variable"],
+      "scale": [
+        { "role": "hero", "size": "72px", "weight": "700", "family": "Inter Variable" },
+        { "role": "hero-lead", "size": "30px", "weight": "400", "family": "Inter Variable" },
+        { "role": "h2", "size": "48px", "family": "Inter Variable" },
+        { "role": "lead", "size": "20-24px", "family": "Source Serif 4 Variable" },
+        { "role": "prose", "size": "17px", "weight": "400", "family": "Source Serif 4 Variable", "line_height": "25.5px", "max_width": "584.5px" },
+        { "role": "ui", "size": "14px", "weight": "400-500", "family": "Inter Variable" },
+        { "role": "code", "size": "14px", "weight": "400", "family": "Spline Sans Mono Variable" },
+        { "role": "meta", "size": "12px", "weight": "400", "family": "Spline Sans Mono Variable" }
+      ]
+    },
+    "colors": [
+      { "role": "background", "value": "lab(98.26 -0.25 -0.71) (~#F9FAFB)" },
+      { "role": "surface", "value": "#FFFFFF" },
+      { "role": "hero-band", "value": "~#111827 (approx from screenshot)" },
+      { "role": "footer-band", "value": "~#111111 (approx from screenshot)" },
+      { "role": "text-primary", "value": "#1B1E23" },
+      { "role": "text-body", "value": "#323539" },
+      { "role": "text-muted", "value": "~#969BA9 (lab 65.9 -0.8 -8.2)" },
+      { "role": "cta", "value": "~#2563EB (approx from screenshot)" },
+      { "role": "announcement", "value": "~#4ADE9B (approx from screenshot)" }
+    ],
+    "radius": ["4px", "6px", "9999px"],
+    "shadows": [],
+    "image_ratios": [
+      { "usage": "gallery thumbnail", "ratio": "1.60:1" },
+      { "usage": "product screenshot", "ratio": "1.30:1" },
+      { "usage": "editor strip", "ratio": "6.53:1" }
+    ],
+    "grid": { "max_width": "none (content ~1152px, x=137 to x=1289)", "columns": 4, "gutter": "16px (gallery, 276px columns)" }
+  },
+  "taste": [
+    {
+      "name": "Serif for Reading, Sans and Mono for Tools",
+      "trigger": "When the designers faced a product that is a document people read and run code in, and a page that has to show both.",
+      "decision": "Chose a serif for prose (Source Serif 4, 17/25.5px, 584.5px measure) with Inter for interface and mono for code over one sans family everywhere.",
+      "reason": "Long explanatory paragraphs read as writing rather than as UI, and the type change tells the visitor which parts are narrative and which are the tool.",
+      "evidence": [
+        "Source Serif 4 x35, Inter x842, Spline Sans Mono x1346",
+        "prose max-width 584.545px, line-height 1.5",
+        "code at 14px"
+      ]
+    },
+    {
+      "name": "Saturation Reserved for Data",
+      "trigger": "When the designers faced a marketing page for a data-visualization tool.",
+      "decision": "Chose a gray-blue interface on #F9FAFB/#FFFFFF with one solid blue CTA over a saturated brand palette across the page.",
+      "reason": "If the page chrome is colorful, the charts have to compete with it. Here the sunburst, maps and gradient thumbnails carry the color.",
+      "evidence": [
+        "surfaces lab(98.26 -0.25 -0.71) 59.9% and #FFFFFF 34.1% of background area",
+        "text #1B1E23 / #323539",
+        "purple, green and orange-red only in chart thumbnails and hero cards",
+        "syntax colors #005CC5 / #E36209 / #6F42C1 appear only inside the editor mock"
+      ]
+    },
+    {
+      "name": "Flat, Bordered, No Shadows",
+      "trigger": "When the designers faced a page full of screenshots and thumbnails that all need an edge.",
+      "decision": "Chose 1px light borders, 4-6px radii and dark/light bands over drop shadows.",
+      "reason": "Shadows under dozens of thumbnails add gray haze to the charts. Hairlines keep the edges without changing the colors next to them.",
+      "evidence": [
+        "shadows: [] in the sampled set",
+        "radii 6px x96, 4px x76",
+        "gallery thumbnails 640x400 (1.60:1) with light-gray borders",
+        "dark navy hero, light body, near-black footer"
+      ]
+    },
+    {
+      "name": "Two-Register Headline",
+      "trigger": "When the designers faced a new positioning word (\"agentic\") to add to an existing tagline.",
+      "decision": "Chose a 30px w400 lead line with the new word dimmed, followed by a 72px w700 payoff line, over one uniform headline.",
+      "reason": "The visitor reads the old, familiar phrase first, then the large claim, and the dimmed word marks what changed.",
+      "evidence": [
+        "72px x1 and 30px x2 in the size distribution, weights 400 and 700",
+        "\"agentic\" in gray (~#6B7280, approx) among white words on the dark hero"
+      ]
+    }
+  ]
+}

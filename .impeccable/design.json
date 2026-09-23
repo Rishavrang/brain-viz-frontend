@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T00:00:00Z",
+  "title": "Design System: Brain Viz",
+  "extensions": {
+    "colorMeta": {
+      "stage-black": { "role": "neutral", "displayName": "Stage Black", "canonical": "#08090a", "tonalRamp": ["#08090a", "#0f1011", "#161718", "#3b4250", "#62666d", "#8a8f98", "#d0d6e0", "#f7f8f8"] },
+      "panel-surface": { "role": "neutral", "displayName": "Panel Surface", "canonical": "#0f1011", "tonalRamp": ["#08090a", "#0f1011", "#161718", "#3b4250", "#62666d", "#8a8f98", "#d0d6e0", "#f7f8f8"] },
+      "raised-surface": { "role": "neutral", "displayName": "Raised Surface", "canonical": "#161718", "tonalRamp": ["#08090a", "#0f1011", "#161718", "#3b4250", "#62666d", "#8a8f98", "#d0d6e0", "#f7f8f8"] },
+      "text-primary": { "role": "primary", "displayName": "Near-White", "canonical": "#f7f8f8", "tonalRamp": ["#08090a", "#161718", "#3b4250", "#62666d", "#8a8f98", "#d0d6e0", "#e2e4e7", "#f7f8f8"] },
+      "text-meta": { "role": "neutral", "displayName": "Meta Gray", "canonical": "#8a8f98", "tonalRamp": ["#161718", "#3b4250", "#62666d", "#8a8f98", "#a9b4c8", "#d0d6e0", "#e2e4e7", "#f7f8f8"] },
+      "text-disabled": { "role": "neutral", "displayName": "Disabled Gray (decorative only)", "canonical": "#62666d", "tonalRamp": ["#161718", "#3b4250", "#62666d", "#8a8f98", "#a9b4c8", "#d0d6e0", "#e2e4e7", "#f7f8f8"] },
+      "evidence-weak": { "role": "tertiary", "displayName": "Dim Evidence Blue", "canonical": "#5f6fa0", "tonalRamp": ["#1d2238", "#2f3860", "#414d78", "#5f6fa0", "#7d8bb5", "#9ba6c8", "#b9c1db", "#d7dbec"] },
+      "evidence-mid": { "role": "tertiary", "displayName": "Amber Evidence", "canonical": "#e9a24b", "tonalRamp": ["#4a3013", "#754d1e", "#a06c2c", "#c98a3c", "#e9a24b", "#efb96f", "#f4d0a0", "#f9e6cf"] },
+      "evidence-strong": { "role": "tertiary", "displayName": "Hot Evidence Red-Orange", "canonical": "#ff5b3a", "tonalRamp": ["#4d1409", "#7a2010", "#a62f18", "#d24024", "#ff5b3a", "#ff8266", "#ffab97", "#ffd2c7"] },
+      "shell-rim": { "role": "neutral", "displayName": "Shell Rim Light", "canonical": "#a9b4c8", "tonalRamp": ["#1f232b", "#3b4250", "#535c6e", "#6f7a8f", "#8994aa", "#a9b4c8", "#c5cddb", "#e1e6ee"] }
+    },
+    "typographyMeta": {
+      "panel-empty-title": { "displayName": "Empty Title", "purpose": "Heading of the panel empty state." },
+      "detail-title": { "displayName": "Title", "purpose": "Detail card title." },
+      "body": { "displayName": "Body", "purpose": "Document default text." },
+      "message": { "displayName": "Message", "purpose": "User bubbles, empty-state copy, composer input." },
+      "reply": { "displayName": "Reply", "purpose": "Assistant explanations only, in Source Serif 4." },
+      "ui": { "displayName": "UI", "purpose": "Panel title, notice titles, point labels, example rows." },
+      "meta": { "displayName": "Meta", "purpose": "Buttons, legend, hints, notes, detail labels." },
+      "data-mono": { "displayName": "Data Mono", "purpose": "Point numbers, coordinates, counts, kbd." }
+    },
+    "shadows": [
+      { "name": "ring", "value": "inset 0 0 0 1px rgba(255,255,255,0.08)", "purpose": "Edge for panel, card, composer, tags, kbd." },
+      { "name": "ring-soft", "value": "inset 0 0 0 1px rgba(255,255,255,0.05)", "purpose": "Legend and resting example rows." },
+      { "name": "float", "value": "0 2px 32px rgba(0,0,0,0.25)", "purpose": "Only surfaces floating over the stage: chat panel and detail card." },
+      { "name": "evidence-ring", "value": "inset 0 0 0 1.5px var(--dot)", "purpose": "Evidence-colored ring on point-number badges." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)", "purpose": "All state transitions." },
+      { "name": "dur", "value": "0.16s", "purpose": "Color, background, box-shadow, opacity transitions." },
+      { "name": "skeleton-pulse", "value": "1.4s infinite, opacity 1 to 0.4, 0.15s stagger", "purpose": "Loading placeholder bars." }
+    ],
+    "breakpoints": [
+      { "name": "sheet", "value": "max-width: 899px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Send Pill",
+      "kind": "button",
+      "refersTo": "send-button",
+      "description": "The one primary action: near-white pill at the composer's right edge.",
+      "html": "<button class=\"ds-send\" aria-label=\"Send\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><path d=\"M7 11.5V2.5M7 2.5L3 6.5M7 2.5L11 6.5\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-send{display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:9999px;background:#f7f8f8;color:#08090a;cursor:pointer;transition:background .16s cubic-bezier(.25,.46,.45,.94)}.ds-send:hover{background:#fff}.ds-send:focus-visible{outline:1px solid rgba(255,255,255,.7);outline-offset:2px}"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "notice",
+      "description": "Quiet secondary action, e.g. New scenario, Try again.",
+      "html": "<button class=\"ds-text-btn\">New scenario</button>",
+      "css": ".ds-text-btn{padding:4px 8px;border:0;border-radius:6px;background:transparent;font:510 12px/16px 'Inter Variable',system-ui,sans-serif;color:#d0d6e0;cursor:pointer;transition:background .16s cubic-bezier(.25,.46,.45,.94),color .16s cubic-bezier(.25,.46,.45,.94)}.ds-text-btn:hover{background:rgba(255,255,255,.06);color:#f7f8f8}.ds-text-btn:focus-visible{outline:1px solid rgba(255,255,255,.7);outline-offset:2px}"
+    },
+    {
+      "name": "Composer",
+      "kind": "input",
+      "refersTo": "composer-box",
+      "description": "Raised ring-edged input box with the send pill.",
+      "html": "<div class=\"ds-composer\"><textarea rows=\"1\" placeholder=\"Describe a scenario\"></textarea></div>",
+      "css": ".ds-composer{display:flex;align-items:flex-end;gap:8px;padding:6px 6px 6px 12px;border-radius:8px;background:#161718;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:box-shadow .16s cubic-bezier(.25,.46,.45,.94)}.ds-composer:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}.ds-composer textarea{flex:1;padding:4px 0;border:0;outline:0;resize:none;background:transparent;font:400 14px/20px 'Inter Variable',system-ui,sans-serif;color:#f7f8f8}.ds-composer textarea::placeholder{color:#8a8f98}.ds-composer:has(textarea:focus-visible){outline:1px solid rgba(255,255,255,.7);outline-offset:2px}"
+    },
+    {
+      "name": "Point Row",
+      "kind": "custom",
+      "refersTo": "point-row",
+      "description": "Numbered list row linked to the brain; badge ring carries evidence color.",
+      "html": "<button class=\"ds-point-row\"><span class=\"ds-point-num\">3</span><span class=\"ds-point-text\"><span class=\"ds-point-ev\">Moderate evidence</span><span class=\"ds-point-study\">Study name, 2019</span></span></button>",
+      "css": ".ds-point-row{display:flex;align-items:center;gap:12px;width:100%;padding:8px;border:0;border-radius:8px;background:transparent;text-align:left;cursor:pointer;transition:background .16s cubic-bezier(.25,.46,.45,.94)}.ds-point-row:hover{background:rgba(255,255,255,.05)}.ds-point-num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font:500 11px 'JetBrains Mono Variable',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#f7f8f8;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1.5px #e9a24b}.ds-point-text{display:grid;min-width:0}.ds-point-ev{font:510 13px/20px 'Inter Variable',system-ui,sans-serif;color:#e2e4e7}.ds-point-study{font:400 12px/16px 'Inter Variable',system-ui,sans-serif;color:#8a8f98}.ds-point-row:focus-visible{outline:1px solid rgba(255,255,255,.7);outline-offset:2px}"
+    },
+    {
+      "name": "Detail Card",
+      "kind": "card",
+      "refersTo": "detail-card",
+      "description": "Floating pinned-point card with label/value rows and the one soft shadow.",
+      "html": "<div class=\"ds-detail\"><div class=\"ds-detail-title\">Point 3</div><dl class=\"ds-detail-rows\"><div class=\"ds-detail-row\"><dt>Evidence</dt><dd>Moderate</dd></div><div class=\"ds-detail-row\"><dt>Coordinate</dt><dd class=\"ds-mono\">−12.0, 34.5, 8.0</dd></div></dl></div>",
+      "css": ".ds-detail{width:340px;padding:16px;border-radius:12px;background:#0f1011;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 2px 32px rgba(0,0,0,.25)}.ds-detail-title{font:590 15px/24px 'Inter Variable',system-ui,sans-serif;color:#f7f8f8}.ds-detail-rows{display:grid;gap:8px;margin:12px 0 0}.ds-detail-row{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:baseline}.ds-detail-row dt{font:400 12px/20px 'Inter Variable',system-ui,sans-serif;color:#8a8f98}.ds-detail-row dd{margin:0;font:400 13px/20px 'Inter Variable',system-ui,sans-serif;color:#e2e4e7}.ds-mono{font:400 12px 'JetBrains Mono Variable',ui-monospace,monospace;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Point Tag",
+      "kind": "chip",
+      "refersTo": "point-tag",
+      "description": "Mono number label anchored to a point on the brain.",
+      "html": "<span class=\"ds-point-tag\">3</span>",
+      "css": ".ds-point-tag{display:inline-flex;align-items:center;height:16px;padding:0 5px;border-radius:4px;font:500 11px/16px 'JetBrains Mono Variable',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#e2e4e7;background:rgba(8,9,10,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}"
+    },
+    {
+      "name": "Legend",
+      "kind": "custom",
+      "refersTo": "legend",
+      "description": "Evidence-strength key: three-stop bar with Weaker / Stronger ends.",
+      "html": "<div class=\"ds-legend\"><span class=\"ds-legend-title\">Evidence strength</span><span class=\"ds-legend-bar\"></span><span class=\"ds-legend-ends\"><span>Weaker</span><span>Stronger</span></span></div>",
+      "css": ".ds-legend{display:grid;gap:8px;width:168px;padding:8px 10px;border-radius:8px;background:rgba(8,9,10,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}.ds-legend-title{font:510 12px/16px 'Inter Variable',system-ui,sans-serif;color:#d0d6e0}.ds-legend-bar{display:block;height:4px;border-radius:9999px;background:linear-gradient(90deg,#5f6fa0,#e9a24b,#ff5b3a)}.ds-legend-ends{display:flex;justify-content:space-between;font:400 11px/14px 'Inter Variable',system-ui,sans-serif;color:#8a8f98}"
+    },
+    {
+      "name": "Notice",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "Raised error or connection notice.",
+      "html": "<div class=\"ds-notice\"><p class=\"ds-notice-title\">Can’t reach the evidence server</p><p class=\"ds-notice-body\">Check that it’s running, then try again.</p></div>",
+      "css": ".ds-notice{display:grid;gap:4px;justify-items:start;padding:12px;border-radius:8px;background:#161718;font:400 13px/20px 'Inter Variable',system-ui,sans-serif}.ds-notice p{margin:0}.ds-notice-title{font-weight:510;color:#f7f8f8}.ds-notice-body{color:#8a8f98}"
+    },
+    {
+      "name": "Skeleton",
+      "kind": "custom",
+      "refersTo": "skeleton",
+      "description": "Loading bars while evidence is fetched.",
+      "html": "<div style=\"display:grid;gap:10px\"><span class=\"ds-skel\" style=\"width:92%\"></span><span class=\"ds-skel\" style=\"width:78%\"></span></div>",
+      "css": ".ds-skel{display:block;height:10px;border-radius:4px;background:rgba(255,255,255,.07);animation:ds-pulse 1.4s cubic-bezier(.25,.46,.45,.94) infinite}@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.4}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Instrument Beside the Specimen",
+    "overview": "The brain owns the screen. It sits full-bleed on a near-black stage, and everything textual is a docked instrument beside it: one 400px panel inset 16px from the edge, one small legend, one drag/zoom hint. The world is a Linear-derived dark theme pinned by the user. Depth is tonal (three surfaces a few percent apart), edges are white-alpha inset rings, and the only chroma on screen is data: the evidence-strength ramp on the points.",
+    "keyCharacteristics": [
+      "Stage #08090a, panel #0f1011, raised #161718; no light surfaces.",
+      "Chrome is achromatic. Color appears only as evidence strength on points, list badges and the legend.",
+      "Rings, not fills or shadows, separate surfaces.",
+      "One primary action, a near-white pill.",
+      "Weak evidence looks weak: dim, cool, small, low glow."
+    ],
+    "rules": [
+      { "name": "The Data-Only Chroma Rule", "body": "Hue means evidence strength and nothing else. Buttons, links, nav, focus and hover are white-alpha.", "section": "colors" },
+      { "name": "The Unreported Is Gray Rule", "body": "Missing data never borrows a ramp color.", "section": "colors" },
+      { "name": "The Meta Contrast Rule", "body": "Anything the reader must read is #8a8f98 or lighter on the surfaces; #62666d is for things that may be missed.", "section": "colors" },
+      { "name": "The Lightness-Not-Bold Rule", "body": "Rank text by stepping down the text ramp and by 400/510/590. Do not add 600+ weights or new sizes to create emphasis.", "section": "typography" },
+      { "name": "The Mono Means Identifier Rule", "body": "Mono is for point numbers and coordinates, which must read identically on brain, list and detail card.", "section": "typography" },
+      { "name": "The One Shadow Rule", "body": "Only surfaces that float over the stage carry the soft drop shadow. Cards, rows and tags never do.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do rank text with the ramp #f7f8f8 to #8a8f98 and weights 400/510/590.",
+      "Do separate surfaces with 5% or 8% white inset rings.",
+      "Do derive point color, size and glow from the same strength value so weak evidence reads weak.",
+      "Do keep point numbers identical on brain, list and detail card, in mono.",
+      "Do keep meta text at #8a8f98 or lighter.",
+      "Do keep the association-not-proof note visible beside the composer."
+    ],
+    "donts": [
+      "Don't use a hue outside the evidence ramp for chrome, links, buttons or focus.",
+      "Don't put a drop shadow on ordinary cards, rows or tags.",
+      "Don't use #62666d for text that carries information.",
+      "Don't use a light surface, gradient imagery or illustrations; the only gradient is the legend bar.",
+      "Don't paint an unreported weight with a ramp color.",
+      "Don't use serif outside assistant replies, or mono outside identifiers and coordinates."
+    ]
+  }
+}

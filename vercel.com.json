@@ -1,0 +1,89 @@
+{
+  "source": "https://vercel.com",
+  "tokens": {
+    "spacing": {
+      "scale": [2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 208],
+      "base_unit": 4
+    },
+    "typography": {
+      "families": ["GeistSans", "Geist Mono"],
+      "scale": [
+        { "role": "h1", "size": "64px", "weight": "400", "family": "GeistSans", "line_height": "64px", "letter_spacing": "-3.84px" },
+        { "role": "h2", "size": "56px", "weight": "450", "family": "GeistSans", "line_height": "56px", "letter_spacing": "-3.36px" },
+        { "role": "lead", "size": "24px", "weight": "400-450", "family": "GeistSans" },
+        { "role": "button", "size": "16px", "weight": "500", "family": "GeistSans" },
+        { "role": "body", "size": "14px", "weight": "400", "family": "GeistSans", "line_height": "20px" },
+        { "role": "meta", "size": "11-12px", "weight": "400", "family": "GeistSans" },
+        { "role": "mono", "size": "12-14px", "weight": "400", "family": "Geist Mono" }
+      ]
+    },
+    "colors": [
+      { "role": "background", "value": "#FAFAFA" },
+      { "role": "surface", "value": "#FFFFFF" },
+      { "role": "text-primary", "value": "#171717" },
+      { "role": "text-secondary", "value": "#4D4D4D" },
+      { "role": "text-muted", "value": "#8F8F8F" },
+      { "role": "cta-fill", "value": "#171717" },
+      { "role": "ring", "value": "#EBEBEB" },
+      { "role": "ring-alpha", "value": "rgba(0,0,0,0.08)" }
+    ],
+    "radius": ["4px", "6px", "9999px"],
+    "shadows": [
+      "0 0 0 1px rgba(0,0,0,0.08)",
+      "0 0 0 1px #EBEBEB"
+    ],
+    "image_ratios": [
+      { "usage": "product mock (Notion)", "ratio": "1.90:1" },
+      { "usage": "product mock (Zapier)", "ratio": "1.78:1" }
+    ],
+    "grid": { "max_width": "none (gutter to gutter, x=24 to x=1401 at 1440)", "columns": 12, "gutter": "24px" }
+  },
+  "taste": [
+    {
+      "name": "Gray UI, Logos Carry the Color",
+      "trigger": "When the designers faced a page with nothing to prove except that big companies run on the product.",
+      "decision": "Chose a gray-only interface (#FAFAFA, #171717, #4D4D4D) over a brand-hue accent for CTAs and links.",
+      "reason": "The customer logos are the persuasion. If the interface has its own accent, OpenAI's and DoorDash's marks compete with it.",
+      "evidence": [
+        "#FAFAFA 70.9%, #FFFFFF 17.5%, #171717 about 11% of background area",
+        "primary CTA is a #171717 pill",
+        "#297A3A appears x3, no other chroma in the UI",
+        "7-logo row across x=24 to x=1401"
+      ]
+    },
+    {
+      "name": "Tight Regular-Weight Display Type",
+      "trigger": "When the designers faced a 64px headline that had to feel large without shouting.",
+      "decision": "Chose weight 400 with -0.06em tracking and 1.0 line-height over a bold display weight with default tracking.",
+      "reason": "At this size a bold weight looks heavy, and default tracking leaves gaps between letters. Tight regular type reads as one shape.",
+      "evidence": [
+        "h1 64px/64px w400 tracking -3.84px",
+        "h2 56px/56px w450 tracking -3.36px",
+        "body 14/20px w400",
+        "no weight above 500 in the sampled elements"
+      ]
+    },
+    {
+      "name": "Rings, Not Shadows",
+      "trigger": "When the designers faced panels that had to separate from a near-white page.",
+      "decision": "Chose a 1px ring (rgba(0,0,0,0.08) or #EBEBEB) and a whiter fill (#FFFFFF on #FAFAFA) over blurred drop shadows or thick borders.",
+      "reason": "On a light page, drop shadows add gray haze under every panel. A 2% lightness step plus a hairline gives an edge without darkening the space around it.",
+      "evidence": [
+        "rgba(0,0,0,0.08) ring x5, #EBEBEB ring x7",
+        "no offset or blur shadow in the sampled set",
+        "radius 6px on utility buttons, pill on hero CTAs"
+      ]
+    },
+    {
+      "name": "Edge-Anchored, Empty Between",
+      "trigger": "When the designers faced a wide screen and the usual choice of a centered container.",
+      "decision": "Chose a 12-column grid running gutter to gutter (24px margins, max-width none) with 208px between sections over a centered 1200px container.",
+      "reason": "Left-anchored headings, nav logo and logo row share one edge at x=24. With the space between sections left empty, each block reads on its own.",
+      "evidence": [
+        "12 columns x 92.72px, 24px gap, x=24 to x=1401",
+        "section gaps 208px measured twice, no dividers",
+        "h1, nav logo and logo row all start at x=24"
+      ]
+    }
+  ]
+}
