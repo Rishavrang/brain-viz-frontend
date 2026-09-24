@@ -134,7 +134,7 @@ The brain owns the screen. It sits full-bleed on a near-black stage, and everyth
 
 Hierarchy is carried by lightness and by weights 400 / 510 / 590, not by extra sizes or bold. Long explanatory replies switch to a serif so they read as writing; everything else is Inter. Point numbers and coordinates are set in mono so they read as identifiers and stay tabular.
 
-Below 900px the panel becomes a bottom sheet (46dvh, 8px inset) and the stage keeps the rest. While a point is pinned, the brain re-centers in the strip above the detail card so the card never covers it.
+The first state is a landing on the same stage (see Landing); entering glides the camera into the application's view. Below 900px the panel becomes a bottom sheet (46dvh, 8px inset) and the stage keeps the rest. While a point is pinned, the brain re-centers in the strip above the detail card so the card never covers it.
 
 **Key Characteristics:**
 - Stage `#08090a`, panel `#0f1011`, raised `#161718`; no light surfaces.
@@ -249,6 +249,13 @@ Three 10px bars, 4px radius, 7% white, pulsing opacity 1 to 0.4 over 1.4s, stagg
 
 ### Motion and focus
 State changes are 0.16s on color, background and box-shadow. Points pop in with a staggered scale-up when a result arrives; hovering a row and hovering a point light each other; pinning eases the orbit target. `prefers-reduced-motion` collapses transitions and animations to 0.01ms. Global `:focus-visible` is a 1px white (70%) outline, 2px offset.
+
+### Landing
+The entrance state of the same stage, not a separate page: the one canvas and brain persist into the application. Wide screens: a statement block anchored one 12-column grid column in from the 24px page margin (5 columns wide), vertically centered, with the brain offset right via the camera view offset and seen from above and to the side (azimuth about -35°, elevation about 11°) at distance 4.9. Squarer or smaller wide screens zoom the brain out so it never crowds the copy. Narrow or portrait screens (<640px, or <900px and not wider than 5:4) stack: the brain sits in the upper part, zoomed to fit the width, and the copy sits at the bottom.
+- **Headline** (510, clamp 40-68px, line-height 1.02, -0.024em, Text Primary, balanced wrap). **Lede** (400, 17/26px, Text Meta, ~31ch). **CTA**: the near-white pill, 44px high, 14px/510, arrow nudges 3px on hover.
+- **Footer**: the credit (12px Text Meta) bottom-left; a live camera readout (mono 11px, Text Disabled, decorative) bottom-right, hidden when stacked.
+- **Scene additions** (landing only): four unlabeled reference markers at standard atlas locations that brighten in turn with their mono number tag, and a sparse field of dust for orbit parallax. Both are achromatic on purpose: hue means evidence strength, and the landing shows no evidence.
+- **Entering**: copy lifts 16px, blurs and fades (0.5s); markers and dust fade out; the camera glides its view offset, zoom and distance into the application's view over 1.5s (ease-in-out cubic); the panel and HUD fade and slide in from 0.85s. Long scene-scale moves use `--ease-out` (cubic-bezier(0.22, 1, 0.36, 1)); UI state changes keep the 0.16s ramp. Reduced motion jumps straight to the application.
 
 ## Do's and Don'ts
 

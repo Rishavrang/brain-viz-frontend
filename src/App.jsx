@@ -2,7 +2,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Brain from './components/Brain'
 import BrainPoint from './components/BrainPoint'
-import SceneRig from './components/SceneRig'
+import SceneRig, { ENTER_DURATION } from './components/SceneRig'
+import LandingScene from './components/LandingScene'
+import Landing from './components/Landing'
+import Readout from './components/Readout'
 import ChatPanel from './components/ChatPanel'
 import PointDetail from './components/PointDetail'
 import { Hint, Legend } from './components/StageHud'
@@ -13,6 +16,10 @@ const API = 'http://127.0.0.1:8000'
 const NARROW = 900
 const PANEL_W = 400
 const GUTTER = 16
+// The camera glide plus the chrome's delayed fade-in (App.css, .is-entering): leaving
+// the entering phase any sooner would cut those transitions short.
+const ENTER_SETTLE_MS = ENTER_DURATION * 1000 + 500
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // How much of the viewport the chat panel covers, so the brain can be centered in what's left.
 // In the bottom-sheet layout a pinned point's detail card stacks above the sheet, so it counts too.
@@ -59,6 +66,31 @@ function App() {
   const [cardHeight, setCardHeight] = useState(0)
   const inset = usePanelInset(cardHeight)
   const startedRef = useRef(false)
+  // landing → entering (camera glides in, chrome emerges) → app
+  const [phase, setPhase] = useState('landing')
+  const readoutRef = useRef(null)
+  const landing = phase === 'landing'
+
+  // Written straight to the DOM every frame it changes, so React doesn't re-render at 60fps.
+  function writeReadout(text) {
+    if (readoutRef.current) readoutRef.current.textContent = text
+  }
+
+  function enter() {
+    if (phase !== 'landing') return
+    setPhase('entering')
+  }
+
+  useEffect(() => {
+    if (phase !== 'entering') return
+    const timer = setTimeout(() => {
+      setPhase('app')
+      // Hand focus to the scenario input on devices where that won't pop up a keyboard.
+      const input = document.querySelector('.panel textarea')
+      if (input && !input.disabled && window.matchMedia('(pointer: fine)').matches) input.focus()
+    }, REDUCED_MOTION ? 50 : ENTER_SETTLE_MS)
+    return () => clearTimeout(timer)
+  }, [phase])
 
   const startConversation = useCallback(async () => {
     setConnection('connecting')
@@ -175,7 +207,7 @@ function App() {
   }, [points, selectedId])
 
   return (
-    <main className="app">
+    <main className={`app is-${phase}`}>
       <div className="stage" aria-label="3D brain viewer">
         <Canvas
           camera={{ position: [0, 0, 4], fov: 50 }}
@@ -190,8 +222,11 @@ function App() {
             inset={inset}
             focus={focus}
             idle={points.length === 0 && !interacted}
+            landing={landing}
             onInteract={() => setInteracted(true)}
           />
+          {phase !== 'app' && <LandingScene active={landing} />}
+          {phase !== 'app' && <Readout onChange={writeReadout} />}
           {points.map((point, index) => (
             <BrainPoint
               key={point.pointNumber}
@@ -207,35 +242,39 @@ function App() {
         </Canvas>
       </div>
 
-      <div className={`hud hud-top${selectedId !== null ? ' is-pinned' : ''}`}>{points.length > 0 && <Legend />}</div>
+      {phase !== 'app' && <Landing leaving={!landing} readoutRef={readoutRef} onEnter={enter} />}
 
-      <div className="hud hud-bottom" ref={hudBottomRef}>
-        {activePoint ? (
-          <PointDetail
-            point={activePoint}
-            pinned={activePoint.pointNumber === selectedId}
-            onRelease={() => setSelectedId(null)}
-          />
-        ) : (
-          <Hint />
-        )}
+      <div className="chrome" inert={landing}>
+        <div className={`hud hud-top${selectedId !== null ? ' is-pinned' : ''}`}>{points.length > 0 && <Legend />}</div>
+
+        <div className="hud hud-bottom" ref={hudBottomRef}>
+          {activePoint ? (
+            <PointDetail
+              point={activePoint}
+              pinned={activePoint.pointNumber === selectedId}
+              onRelease={() => setSelectedId(null)}
+            />
+          ) : (
+            <Hint />
+          )}
+        </div>
+
+        <ChatPanel
+          messages={messages}
+          points={points}
+          activeId={activeId}
+          selectedId={selectedId}
+          connection={connection}
+          sending={sending}
+          inputText={inputText}
+          onInput={setInputText}
+          onSend={sendMessage}
+          onRetryConnection={startConversation}
+          onNew={newScenario}
+          onHoverPoint={setHoveredId}
+          onSelectPoint={toggleSelect}
+        />
       </div>
-
-      <ChatPanel
-        messages={messages}
-        points={points}
-        activeId={activeId}
-        selectedId={selectedId}
-        connection={connection}
-        sending={sending}
-        inputText={inputText}
-        onInput={setInputText}
-        onSend={sendMessage}
-        onRetryConnection={startConversation}
-        onNew={newScenario}
-        onHoverPoint={setHoveredId}
-        onSelectPoint={toggleSelect}
-      />
     </main>
   )
 }
