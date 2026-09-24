@@ -607,6 +607,11 @@ kbd {
     top: 8px;
   }
 
+  /* The strip above a pinned card is small; the legend would sit on top of points there. */
+  .hud-top.is-pinned {
+    display: none;
+  }
+
   .hud-bottom {
     bottom: calc(46dvh + 24px);
   }

@@ -207,7 +207,7 @@ function App() {
         </Canvas>
       </div>
 
-      <div className="hud hud-top">{points.length > 0 && <Legend />}</div>
+      <div className={`hud hud-top${selectedId !== null ? ' is-pinned' : ''}`}>{points.length > 0 && <Legend />}</div>
 
       <div className="hud hud-bottom" ref={hudBottomRef}>
         {activePoint ? (
