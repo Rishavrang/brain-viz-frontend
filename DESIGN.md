@@ -134,7 +134,7 @@ The brain owns the screen. It sits full-bleed on a near-black stage, and everyth
 
 Hierarchy is carried by lightness and by weights 400 / 510 / 590, not by extra sizes or bold. Long explanatory replies switch to a serif so they read as writing; everything else is Inter. Point numbers and coordinates are set in mono so they read as identifiers and stay tabular.
 
-Below 900px the panel becomes a bottom sheet (46dvh, 8px inset) and the stage keeps the rest.
+Below 900px the panel becomes a bottom sheet (46dvh, 8px inset) and the stage keeps the rest. While a point is pinned, the brain re-centers in the strip above the detail card so the card never covers it.
 
 **Key Characteristics:**
 - Stage `#08090a`, panel `#0f1011`, raised `#161718`; no light surfaces.

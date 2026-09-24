@@ -15,19 +15,21 @@ const PANEL_W = 400
 const GUTTER = 16
 
 // How much of the viewport the chat panel covers, so the brain can be centered in what's left.
-function usePanelInset() {
+// In the bottom-sheet layout a pinned point's detail card stacks above the sheet, so it counts too.
+function usePanelInset(cardHeight) {
   const read = () => {
     const narrow = window.innerWidth < NARROW
     return narrow
-      ? { x: 0, y: Math.round(window.innerHeight * 0.46) + GUTTER }
+      ? { x: 0, y: Math.round(window.innerHeight * 0.46) + GUTTER + cardHeight }
       : { x: PANEL_W + GUTTER * 2, y: 0 }
   }
   const [inset, setInset] = useState(read)
   useEffect(() => {
     const onResize = () => setInset(read())
+    onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
+  }, [cardHeight])
   return inset
 }
 
@@ -54,7 +56,8 @@ function App() {
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
   const [interacted, setInteracted] = useState(false)
-  const inset = usePanelInset()
+  const [cardHeight, setCardHeight] = useState(0)
+  const inset = usePanelInset(cardHeight)
   const startedRef = useRef(false)
 
   const startConversation = useCallback(async () => {
@@ -144,6 +147,24 @@ function App() {
   }
 
   const activeId = hoveredId ?? selectedId
+  const hudBottomRef = useRef(null)
+
+  // Only a pinned card moves the brain; a hover card is transient and must not make it jump.
+  useEffect(() => {
+    const el = hudBottomRef.current
+    if (selectedId === null || !el || window.innerWidth >= NARROW) {
+      setCardHeight(0)
+      return
+    }
+    const measure = () => {
+      const card = el.querySelector('.detail')
+      setCardHeight(card ? Math.round(card.getBoundingClientRect().height) + 8 : 0)
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [selectedId])
   const activePoint = useMemo(
     () => points.find((p) => p.pointNumber === activeId) ?? null,
     [points, activeId],
@@ -188,7 +209,7 @@ function App() {
 
       <div className="hud hud-top">{points.length > 0 && <Legend />}</div>
 
-      <div className="hud hud-bottom">
+      <div className="hud hud-bottom" ref={hudBottomRef}>
         {activePoint ? (
           <PointDetail
             point={activePoint}
