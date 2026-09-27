@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { evidenceHex, sentenceCase } from '../lib/evidence'
 
 const EXAMPLES = [
@@ -6,6 +6,27 @@ const EXAMPLES = [
   'Hearing my favorite song after a long day',
   'Trying to remember where I parked my car',
 ]
+
+const STATUS_STEPS = ['Analyzing scenario…', 'Gathering evidence…', 'Mapping coordinates…', 'Preparing explanation…']
+const STATUS_INTERVAL_MS = 1800
+
+// Mounted only while a response is pending, so the cycle restarts at the first step each time.
+function LoadingStatus() {
+  const [step, setStep] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setStep((s) => (s + 1) % STATUS_STEPS.length), STATUS_INTERVAL_MS)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <div className="msg-status" role="status">
+      <span key={step} className="status-text">
+        {STATUS_STEPS[step]}
+      </span>
+    </div>
+  )
+}
 
 function ArrowUp() {
   return (
@@ -147,13 +168,7 @@ function ChatPanel({
               )}
             </div>
           ))}
-          {sending && (
-            <div className="msg msg-assistant is-loading" aria-label="Looking up research evidence">
-              <span className="skeleton" style={{ width: '92%' }} />
-              <span className="skeleton" style={{ width: '78%' }} />
-              <span className="skeleton" style={{ width: '54%' }} />
-            </div>
-          )}
+          {sending && <LoadingStatus />}
         </div>
 
         {points.length > 0 && (
