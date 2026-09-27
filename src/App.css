@@ -395,6 +395,60 @@ kbd {
   }
 }
 
+/* Coordinate part: collapsed by default, UI-weight summary against the serif narrative above it. */
+.coord-part {
+  margin-top: 12px;
+  font-family: var(--sans);
+}
+
+.coord-part-summary {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 6px;
+  margin-left: -8px;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  list-style: none;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 510;
+  color: var(--text-4);
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.coord-part-summary::-webkit-details-marker {
+  display: none;
+}
+
+.coord-part-summary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-1);
+}
+
+.coord-part-summary svg {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.coord-part[open] > .coord-part-summary svg {
+  transform: rotate(90deg);
+}
+
+.coord-part-body {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  box-shadow: inset 0 0 0 0.5px var(--hairline);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-3);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .notice,
 .msg-error {
   display: grid;

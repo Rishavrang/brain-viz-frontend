@@ -144,7 +144,10 @@ function App() {
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const data = await response.json()
 
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }])
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: data.narrative_part, coordinatePart: data.coordinate_part ?? null },
+      ])
       setPoints((data.coordinates ?? []).map(normalizePoint))
       setHoveredId(null)
       setSelectedId(null)

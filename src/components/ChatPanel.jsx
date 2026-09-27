@@ -28,6 +28,14 @@ function LoadingStatus() {
   )
 }
 
+function ChevronRight() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <path d="M3.5 1.5L7 5L3.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 function ArrowUp() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -164,7 +172,18 @@ function ChatPanel({
                   <p className="notice-body">{msg.content}</p>
                 </>
               ) : (
-                <p>{msg.content}</p>
+                <>
+                  <p>{msg.content}</p>
+                  {msg.coordinatePart && (
+                    <details className="coord-part">
+                      <summary className="coord-part-summary">
+                        <ChevronRight />
+                        <span>Coordinate details</span>
+                      </summary>
+                      <p className="coord-part-body">{msg.coordinatePart}</p>
+                    </details>
+                  )}
+                </>
               )}
             </div>
           ))}
