@@ -141,6 +141,18 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, conversation_id: conversationId }),
       })
+      if (response.status === 429) {
+        setInputText((current) => current || text)
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: 'error',
+            title: 'Message limit reached',
+            content: 'You’ve reached today’s message limit. Please try again tomorrow.',
+          },
+        ])
+        return
+      }
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const data = await response.json()
 
