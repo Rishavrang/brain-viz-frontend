@@ -369,7 +369,6 @@ kbd {
   font-size: 16px;
   line-height: 25px;
   color: var(--text-2);
-  white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
@@ -445,8 +444,74 @@ kbd {
   font-size: 13px;
   line-height: 20px;
   color: var(--text-3);
-  white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+/* Rendered markdown: hierarchy by lightness and weight (400/510/590), no extra sizes or dividers. */
+.msg-assistant > :first-child,
+.coord-part-body > :first-child {
+  margin-top: 0;
+}
+
+.msg-assistant > :last-child,
+.coord-part-body > :last-child {
+  margin-bottom: 0;
+}
+
+.msg-assistant p,
+.msg-assistant ul,
+.msg-assistant ol {
+  margin: 1em 0 0;
+}
+
+.msg-assistant h1,
+.msg-assistant h2,
+.msg-assistant h3,
+.msg-assistant h4 {
+  margin: 1.5em 0 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 590;
+  color: var(--text-1);
+}
+
+.msg-assistant strong,
+.coord-part-body strong {
+  font-weight: 590;
+  color: var(--text-1);
+}
+
+.msg-assistant ul,
+.msg-assistant ol,
+.coord-part-body ul,
+.coord-part-body ol {
+  padding-left: 20px;
+}
+
+.msg-assistant li + li {
+  margin-top: 4px;
+}
+
+.coord-part-body p,
+.coord-part-body ul,
+.coord-part-body ol {
+  margin: 8px 0 0;
+}
+
+.coord-part-body h1,
+.coord-part-body h2,
+.coord-part-body h3,
+.coord-part-body h4 {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 590;
+  color: var(--text-1);
+}
+
+.coord-part-body li + li {
+  margin-top: 2px;
 }
 
 .notice,

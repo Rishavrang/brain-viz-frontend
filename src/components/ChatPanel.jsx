@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import Markdown from 'react-markdown'
 import { evidenceHex, sentenceCase } from '../lib/evidence'
 
 const EXAMPLES = [
@@ -27,6 +28,11 @@ function LoadingStatus() {
     </div>
   )
 }
+
+// The backend keeps "## Coordinate Summary" when it splits the response; the toggle already says
+// "Coordinate details", so rendering it would repeat the label.
+const LEADING_COORD_HEADING = /^\s*#{1,6}\s*Coordinate Summary\s*(?:\r?\n|$)/i
+const stripCoordHeading = (text) => text.replace(LEADING_COORD_HEADING, '').trim()
 
 function ChevronRight() {
   return (
@@ -173,14 +179,16 @@ function ChatPanel({
                 </>
               ) : (
                 <>
-                  <p>{msg.content}</p>
+                  <Markdown>{msg.content}</Markdown>
                   {msg.coordinatePart && (
                     <details className="coord-part">
                       <summary className="coord-part-summary">
                         <ChevronRight />
                         <span>Coordinate details</span>
                       </summary>
-                      <p className="coord-part-body">{msg.coordinatePart}</p>
+                      <div className="coord-part-body">
+                        <Markdown>{stripCoordHeading(msg.coordinatePart)}</Markdown>
+                      </div>
                     </details>
                   )}
                 </>
