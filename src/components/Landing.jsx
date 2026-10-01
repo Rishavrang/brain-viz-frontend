@@ -18,7 +18,7 @@ function Landing({ leaving, readoutRef, onEnter }) {
           <p className="landing-credit">
             Built by{' '}
             <a
-              href="https://www.linkedin.com/in/rishav-rangapure-0688a4324/?isSelfProfile=true"
+              href="https://www.linkedin.com/in/rishav-rangapure-0688a4324/"
               target="_blank"
               rel="noopener noreferrer"
             >

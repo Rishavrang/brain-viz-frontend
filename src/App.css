@@ -887,7 +887,10 @@ kbd {
   line-height: 16px;
 }
 
+/* .landing is pointer-events: none so the brain stays draggable; the links opt back in. */
 .landing-credit a {
+  pointer-events: auto;
+  cursor: pointer;
   color: inherit;
   text-decoration: underline;
   text-decoration-color: rgba(255, 255, 255, 0.16);
