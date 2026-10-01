@@ -882,6 +882,25 @@ kbd {
   color: var(--text-4);
 }
 
+.landing-credit-sub {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.landing-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.16);
+  text-underline-offset: 3px;
+  transition: color 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    text-decoration-color 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.landing-credit a:hover {
+  color: var(--text-2);
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+
 /* A live instrument reading of the camera, decorative: it may be missed. */
 .landing-readout {
   font-size: 11px;

@@ -14,7 +14,24 @@ function Landing({ leaving, readoutRef, onEnter }) {
       </div>
 
       <footer className="landing-foot">
-        <p className="landing-credit">Built by Rishav Rangapure</p>
+        <div className="landing-credits">
+          <p className="landing-credit">
+            Built by{' '}
+            <a
+              href="https://www.linkedin.com/in/rishav-rangapure-0688a4324/?isSelfProfile=true"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Rishav Rangapure
+            </a>
+          </p>
+          <p className="landing-credit landing-credit-sub">
+            Inspired by{' '}
+            <a href="https://www.linkedin.com/in/avi-agola/" target="_blank" rel="noopener noreferrer">
+              Avi Agola
+            </a>
+          </p>
+        </div>
         <p className="landing-readout mono" ref={readoutRef} aria-hidden="true" />
       </footer>
     </div>
